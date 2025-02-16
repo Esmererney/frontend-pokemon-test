@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { usePokemonDetails, usePokemons } from "../hooks/usePokemons";
+import { PokemonModal } from "./PokemonModal";
 
 const PokemonTable = () => {
   const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null);
@@ -34,14 +35,12 @@ const PokemonTable = () => {
           ))}
         </tbody>
       </table>
-      {selectedPokemon && pokemonDetails && (
-        <div>
-          <h2>{selectedPokemon}</h2>
-          <p><strong>Tipo:</strong> {pokemonDetails.types.join(", ")}</p>
-          <p><strong>Peso:</strong> {pokemonDetails.weight} kg</p>
-          <p><strong>Habilidades:</strong> {pokemonDetails.abilities.join(", ")}</p>
-        </div>
-      )}
+      <PokemonModal
+        isOpen={!!selectedPokemon}
+        onClose={() => setSelectedPokemon(null)}
+        pokemonName={selectedPokemon || ""}
+        pokemonDetails={pokemonDetails ?? null}
+      />
       <div className="flex justify-between mt-4">
         <button onClick={() => setPage((p) => Math.max(p - 1, 1))} className="bg-blue-500 text-white px-4 py-2 rounded">
           Anterior
