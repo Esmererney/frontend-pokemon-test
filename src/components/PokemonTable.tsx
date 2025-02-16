@@ -1,9 +1,11 @@
 import { useState } from "react";
-import { usePokemons } from "../hooks/usePokemons";
+import { usePokemonDetails, usePokemons } from "../hooks/usePokemons";
 
 const PokemonTable = () => {
+  const [selectedPokemon, setSelectedPokemon] = useState<string | null>(null);
   const [page, setPage] = useState(1);
   const { data: pokemons, isLoading, error } = usePokemons(page);
+  const {data: pokemonDetails} = usePokemonDetails(selectedPokemon || "");
 
   if (isLoading) return <p>Cargando...</p>;
   if (error) return <p>Error al cargar los datos.</p>;
@@ -22,13 +24,24 @@ const PokemonTable = () => {
           {pokemons?.map((pokemon) => (
             <tr key="pokemon.name">
               <td className="border p-2">{pokemon.name}</td>
-              <td className="border p-2">
-                <img src={`https://img.pokemondb.net/sprites/home/normal/${pokemon.name}.png`} alt={pokemon.name} className="w-16 h-16"/>
+              <td className="border p-2" onDoubleClick={() => setSelectedPokemon(pokemon.name)}>
+                <img 
+                  src={`https://img.pokemondb.net/sprites/home/normal/${pokemon.name}.png`}
+                  alt={pokemon.name}
+                  className="w-16 h-16"/>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      {selectedPokemon && pokemonDetails && (
+        <div>
+          <h2>{selectedPokemon}</h2>
+          <p><strong>Tipo:</strong> {pokemonDetails.types.join(", ")}</p>
+          <p><strong>Peso:</strong> {pokemonDetails.weight} kg</p>
+          <p><strong>Habilidades:</strong> {pokemonDetails.abilities.join(", ")}</p>
+        </div>
+      )}
       <div className="flex justify-between mt-4">
         <button onClick={() => setPage((p) => Math.max(p - 1, 1))} className="bg-blue-500 text-white px-4 py-2 rounded">
           Anterior

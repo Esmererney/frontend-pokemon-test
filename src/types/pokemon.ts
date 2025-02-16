@@ -7,12 +7,14 @@ export const PokemonSchema = z.object({
 
 export type Pokemon = z.infer<typeof PokemonSchema>;
 
-export const PokemonDetailScrema = z.object({
+export const PokemonDetailSchema = z.object({
   id: z.number(),
   name: z.string(),
-  sprites: z.object({
-    front_default: z.string().url(),
-  })
+  weight: z.number(),
+  types: z.array(z.object({ type: z.object({ name: z.string() }) })).transform((types) => types.map((t) => t.type.name)),
+  abilities: z
+    .array(z.object({ ability: z.object({ name: z.string() }) }))
+    .transform((abilities) => abilities.map((a) => a.ability.name)),
 });
 
-export type PokemonDetail = z.infer<typeof PokemonDetailScrema>;
+export type PokemonDetail = z.infer<typeof PokemonDetailSchema>;
