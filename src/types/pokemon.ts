@@ -18,3 +18,14 @@ export const PokemonDetailSchema = z.object({
 });
 
 export type PokemonDetail = z.infer<typeof PokemonDetailSchema>;
+
+export const AbilityEffectSchema = z.object({
+  effect_entries: z.array(
+    z.object({
+      language: z.object({ name: z.string() }),
+      effect: z.string(),
+    })
+  ),
+});
+
+export type AbilityEffect = z.infer<typeof AbilityEffectSchema>
