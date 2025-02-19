@@ -15,7 +15,7 @@ Una aplicación web desarrollada con React y TypeScript que consume la PokéAPI 
 1. Clona el repositorio:
    ```sh
    git clone https://github.com/Esmererney/frontend-pokemon-test.git
-   cd pokemon-explorer
+   cd frontend-pokemon-test
    ```
 2. Instala las dependencias:
    ```sh
