@@ -1,3 +1,7 @@
 @tailwind base; /* Aplica los estilos base de Tailwind */
 @tailwind components; /* Permite agregar clases perzonalizadas reutilizables */
 @tailwind utilities; /* Agrega todas las clases utilitarias como bg-red-500 */
+
+body {
+  background: linear-gradient(to right, #93c5fd, #3b82f6); /* Fondo gradiente */
+}

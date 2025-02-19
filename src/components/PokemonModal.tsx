@@ -28,14 +28,19 @@ export const PokemonModal = ({ isOpen, onClose, pokemonName, pokemonDetails }: P
     setAbilityEffect(effect);
   }
   return (
-    <Dialog.Root open={isOpen} onOpenChange={onClose}>
-      <Dialog.Overlay className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
-      <Dialog.Content className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg shadow-lg w-96">
-        <Dialog.Title className="text-lg font-bold">{pokemonName}</Dialog.Title>
+    <Dialog.Root
+      open={isOpen} 
+      onOpenChange={() => {
+        onClose();
+        setSelectedAbility(null);
+      }}>
+      <Dialog.Overlay className="fixed inset-0 bg-black/50 backdrop-blur-sm" />
+      <Dialog.Content className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-white rounded-lg p-6 shadow-xl w-96">
+        <Dialog.Title className="text-2xl font-semibold text-gray-800">{pokemonName.charAt(0).toUpperCase()  + pokemonName.slice(1)}</Dialog.Title>
         <Dialog.Close className="absolute top-2 right-2 text-gray-500 hover:text-black">✖</Dialog.Close>
 
-        <div className="mt-4">
-          <p><strong>Tipo: </strong> {pokemonDetails.types.join(", ")}</p>
+        <div className="mt-4 text-gray-700">
+          <p><strong>Tipo:</strong> {pokemonDetails.types.join(", ")}</p>
           <p><strong>Peso: </strong> {pokemonDetails.weight} kg</p>
           <p><strong>Habilidades: </strong>
             {pokemonDetails.abilities.map((ability, index, arr) => (
