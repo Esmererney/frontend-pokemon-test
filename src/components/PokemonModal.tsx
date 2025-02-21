@@ -2,21 +2,13 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useState } from "react";
 import { fetchAbilityEffect } from "../services/pokemonService";
 import React from "react";
-
-interface PokemonModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  pokemonName: string;
-  pokemonDetails: {
-    types: string[];
-    weight: number;
-    abilities: string[];
-  } | null;
-}
+import { PokemonModalProps } from "../types/pokemon";
 
 export const PokemonModal = ({ isOpen, onClose, pokemonName, pokemonDetails }: PokemonModalProps ) => {
-  /* Estado para habilidad seleccionada */
+  // Estado para habilidad seleccionada
   const [selectedAbility, setSelectedAbility] = useState<string | null >(null);
+
+  // Habilidad seleccionada
   const [abilityEffect, setAbilityEffect] = useState<string | null >(null);
 
   if (!pokemonDetails) return null;

@@ -1,16 +1,20 @@
 import { useState } from "react";
 
+// Interfaz para las props que recibe el componente
 interface PokemonFilterProps {
-  onSearch: (searchTerm: string) => void;
+  // Función que recibe el término de búsqueda y lo envía al padre
+  onSearch: (searchTerm: string) => void; 
 }
 
-const PokemonFilter: React.FC<PokemonFilterProps> = ({ onSearch }) => {
-  const [searchTerm, setsearchTerm] = useState("");
+// Componente funcional que filtra Pokémon basado en el input del usuario
+const PokemonFilter = ({ onSearch }: PokemonFilterProps) => {
+  const [searchTerm, setsearchTerm] = useState("");  // Estado local para almacenar el término de búsqueda
 
+  // Maneja el cambio en el input
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setsearchTerm(value);
-    onSearch(value);
+    const value = e.target.value; // Obtiene valor del input
+    setsearchTerm(value); // Actualiza estado con el nuevo valor
+    onSearch(value); // Llama funcion con el nuevo valor
   }
 
   return (
