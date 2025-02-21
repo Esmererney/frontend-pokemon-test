@@ -43,3 +43,11 @@ export const AbilityEffectSchema = z.object({
 
 //Tipo basado en la estructura efecto de habilidades (AbilityEffectSchema)
 export type AbilityEffect = z.infer<typeof AbilityEffectSchema>
+
+// Estructura para las props del modal de detalles de Pokémon
+export interface PokemonModalProps {
+  isOpen: boolean; // Controla si el modal está abierto o cerrado
+  onClose: () => void; // Función para cerrar el modal
+  pokemonName: string; // Nombre del Pokémon seleccionado
+  pokemonDetails: PokemonDetail | null; // Puede ser `null` si no hay datos
+}
